@@ -852,7 +852,7 @@ body.dark .courses .box-container .box .thumb span {
     padding: 0.5rem 0;
     line-height: 1.7;
     font-size: 1.6rem;
-    color: #7f8c8d; 
+    color: var(--blue); 
     text-align: justify; 
 }
 
@@ -909,7 +909,7 @@ body.dark .courses .box-container .box .thumb span {
 .course-details .box-container .box h3 {
     margin-top: 1.5rem;
     font-size: 1.8rem;
-    color: #2c3e50;
+    color: var(--blue);
     font-weight: 600;
     transition: color 0.3s ease;
 }
