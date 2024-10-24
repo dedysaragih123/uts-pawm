@@ -1,9 +1,10 @@
-**Tugas 1 II3140 Pengembangan Aplikasi Website dan Mobile **
-Nama : Dedy Hofmanindo Saragih
-NIM  : 18222085
+**Tugas 1 II3140 Pengembangan Aplikasi Website dan Mobile**  
+Nama: Dedy Hofmanindo Saragih  
+NIM: 18222085
 
-**Struktur Direktori**
+## Struktur Direktori
 
+```plaintext
 085-Physics Virtual Lab/
 │
 ├── css/
