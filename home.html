@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- custom css file link -->
+     <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<!-- header section starts -->
+<header class="header">
+    <section class="flex">
+        <!-- Menu button moved to the left -->
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="home.html" class="logo">ITB Virtual Lab</a>
+
+        <form action="" method="post" class="search-form">
+            <input type="text" name="search_box" placeholder="Cari Mata Kuliah..."
+            required maxlength="100">
+            <button type="submit" class="fas fa-search" name="search_box"></button>
+        </form>
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img src="images/pic-1.png" alt="">
+            <h3>Dedy Hofmanindo Saragih</h3>
+            <span>18222085 Student</span>
+            <a href="profile.html" class="btn">view profile</a>
+            <div class="flex-btn">
+                <a href="login.html" class="option-btn">login</a>
+                <a href="register.html" class="option-btn">register</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img src="images/pic-1.png" class="image" alt="">
+        <h3 class="name">Dedy Hofmanindo Saragih</h3>
+        <p class="role">18222085 Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+        <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>my courses</span></a>
+        <a href="assignment.html"><i class="fas fa-tasks"></i><span>assignment</span></a>
+        <a href="exam.html"><i class="fas fa-clipboard-check"></i><span>exam</span></a>
+        <a href="practicum.html"><i class="fas fa-flask"></i><span>practicum</span></a>
+    </nav>
+</div>
+
+<section class="home-grid">
+    <h1 class="greeting">Hi Dedy Hofmanindo Saragih!<br>
+        Selamat Datang di ITB Virtual Lab. Belajar apa hari ini?</h1>    
+
+        <div class="box-container">
+            <!-- Pengingat dan Notifikasi Box -->
+        <div class="box">
+            <h3 class="title">Pengingat dan Notifikasi</h3>
+            <ul>
+                <li>Physics-Exam: 20 Oktober 2024</li>
+                <li>Physics-assignment-deadline: 25 Oktober 2024</li>
+                <li>Physics-Practicum: 26 Oktober2024</li>
+                <li>Physics-New Course: Module 8</li>
+            </ul>
+        </div>
+
+        <!-- Kalender Akademik Box -->
+        <div class="box">
+            <h3 class="title">Kalender Akademik</h3>
+            <p>Sinkronkan jadwal tugas, ujian, dan kelas dengan Google Calendar</p>
+            <a href="#" class="inline-btn">Sinkronisasi Google Calendar</a>
+        </div>
+    </div>
+</section>
+
+<section class="courses">
+    <h1 class="heading">TPB courses</h1>
+        <div class="box-container">
+            <div class="box">
+                <div class="sub-course">
+                    <img src="images/user.png" alt="">
+                    <div class="info">
+                        <h3>Siti</h3>
+                        <span>Pancasila Lecturer</span>
+                    </div>
+                </div>
+                <div class="thumb">
+                    <img src="images/pancasila.png" alt="">
+                    <span>10 modules</span>
+                </div>
+                <h3 class="title">KU1231 Pancasila</h3>
+                <a href="#" class="inline-btn">view Course</a>
+                <a href="#" class="inline-enroll-btn">Enroll This Course</a>
+            </div>
+ 
+            <div class="box">
+                <div class="sub-course">
+                    <img src="images/user.png" alt="">
+                    <div class="info">
+                        <h3>Ayi</h3>
+                        <span>English Lecturer</span>
+                    </div>
+                </div>
+                <div class="thumb">
+                    <img src="images/english.png" alt="">
+                    <span>15 modules</span>
+                </div>
+                <h3 class="title">KU1232 English</h3>
+                <a href="#" class="inline-btn">view Course</a>
+                <a href="#" class="inline-enroll-btn">Enroll This Course</a>
+            </div>
+        
+            <div class="box">
+                <div class="sub-course">
+                    <img src="images/user.png" alt="">
+                    <div class="info">
+                        <h3>Yakub</h3>
+                        <span>Design Engineering Lecturer</span>
+                    </div>
+                </div>
+                <div class="thumb">
+                    <img src="images/design engineering.png" alt="">
+                    <span>12 modules</span>
+                </div>
+                <h3 class="title">KU1233 Design Engineering</h3>
+                <a href="#" class="inline-btn">view Course</a>
+                <a href="#" class="inline-enroll-btn">Enroll This Course</a>
+            </div>     
+
+            <div class="box">
+                <div class="sub-course">
+                    <img src="images/user.png" alt="">
+                    <div class="info">
+                        <h3>Hamkah</h3>
+                        <span>Computing Lecturer</span>
+                    </div>
+                </div>
+                <div class="thumb">
+                    <img src="images/computational thinking.png" alt="">
+                    <span>18 modules</span>
+                </div>
+                <h3 class="title">KU1234 Computing</h3>
+                <a href="#" class="inline-btn">view Course</a>
+                <a href="#" class="inline-enroll-btn">Enroll This Course</a>
+            </div>     
+
+            <div class="box">
+                <div class="sub-course">
+                    <img src="images/user.png" alt="">
+                    <div class="info">
+                        <h3>Rahayu</h3>
+                        <span>Indonesian Lecturer</span>
+                    </div>
+                </div>
+                <div class="thumb">
+                    <img src="images/indonesian.png" alt="">
+                    <span>9 modules</span>
+                </div>
+                <h3 class="title">KU1235 Indonesian</h3>
+                <a href="#" class="inline-btn">view Course</a>
+                <a href="#" class="inline-enroll-btn">Enroll This Course</a>
+            </div>
+
+            <div class="box">
+                <div class="sub-course">
+                    <img src="images/user.png" alt="">
+                    <div class="info">
+                        <h3>Agus</h3>
+                        <span>Sport Lecturer</span>
+                    </div>
+                </div>
+                <div class="thumb">
+                    <img src="images/sport.png" alt="">
+                    <span>11 modules</span>
+                </div>
+                <h3 class="title">KU1236 Sport</h3>
+                <a href="#" class="inline-btn">view Course</a>
+                <a href="#" class="inline-enroll-btn">Enroll This Course</a>
+            </div>
+        </div>
+
+        <div class="more-btn">
+            <a href="allcourses.html" class="inline-option-btn">view all courses</a>
+        </div>
+
+</section>
+
+
+    <!-- custom js file link -->
+     <script src="js/script.js"></script>
+    
+</body>
+</html>

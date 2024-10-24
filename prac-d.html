@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Lab: Transverse Wave Simulation</title>
+    <link rel="stylesheet" href="css/stylelab.css">
+</head>
+<body>
+    <h1>Virtual Lab: Transverse Wave Simulation</h1>
+
+    <!-- Canvas for Wave Display -->
+    <canvas id="waveCanvas"></canvas>
+
+    <!-- Wavelength, Frequency, Velocity Input Section -->
+    <div class="flex-container">
+        <div class="input-box">
+            <label for="wavelength">Wavelength (λ):</label>
+            <input type="number" id="wavelength" step="0.1" min="0.1" placeholder="Enter λ" oninput="calculateWave()">
+        </div>
+        <div class="input-box">
+            <label for="frequency">Frequency (f):</label>
+            <input type="number" id="frequency" step="0.1" min="0.1" placeholder="Enter f" oninput="calculateWave()">
+        </div>
+        <div class="input-box">
+            <label for="velocity">Velocity (v):</label>
+            <input type="number" id="velocity" step="0.1" min="0.1" placeholder="Enter v" oninput="calculateWave()">
+        </div>
+    </div>
+
+    <div class="flex-container">
+        <button onclick="startAnimation()">Start</button>
+        <button onclick="stopAnimation()">Stop</button>
+        <button id="reflectionBtn" onclick="simulateReflection()" disabled>Simulate Reflection</button>
+        <button class="reset-btn" onclick="resetForm()">Reset</button>
+    </div>
+    
+    <!-- Warning Message Section -->
+    <div id="warning" style="color: red; display: none;">Please enter a valid wavelength to simulate reflection.</div>
+    
+
+    <!-- Result Section -->
+    <div id="result"></div>
+
+    <!-- Educational Section -->
+    <div id="education">
+        <p>Transverse waves are characterized by oscillations that are perpendicular to the direction of wave propagation. In this simulation, you can observe how the wave moves, how wavelength (λ) affects the number of crests and troughs, and how frequency (f) determines wave speed (v).</p>
+        <p><b>Instructions:</b> Use the input fields to change the wavelength, frequency, and velocity. Press "Start" to observe the wave in motion, and "Simulate Reflection" to see how waves behave when reflected. Press "Reset" to start over.</p>
+    </div>
+
+    <div class="flex-container">
+        <a href="home.html" class="btn-home">Back to Home</a>
+    </div>
+
+    <script src="js/scriptlab.js"></script>
+</body>
+</html>

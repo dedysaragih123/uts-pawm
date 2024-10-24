@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <section class="flex">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="home.html" class="logo">ITB Virtual Lab</a>
+
+        <form action="" method="post" class="search-form">
+            <input type="text" name="search_box" placeholder="Cari Mata Kuliah..." required maxlength="100">
+            <button type="submit" class="fas fa-search" name="search_box"></button>
+        </form>
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img src="images/pic-1.png" alt="">
+            <h3>Dedy Hofmanindo Saragih</h3>
+            <span>18222085 Student</span>
+            <a href="profile.html" class="btn">view profile</a>
+            <div class="flex-btn">
+                <a href="login.html" class="option-btn">login</a>
+                <a href="register.html" class="option-btn">register</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img src="images/pic-1.png" class="image" alt="">
+        <h3 class="name">Dedy Hofmanindo Saragih</h3>
+        <p class="role">18222085 Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+        <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>my courses</span></a>
+        <a href="assignment.html"><i class="fas fa-tasks"></i><span>assignment</span></a>
+        <a href="exam.html"><i class="fas fa-clipboard-check"></i><span>exam</span></a>
+        <a href="practicum.html"><i class="fas fa-flask"></i><span>practicum</span></a>
+    </nav>
+</div>
+
+<div class="assignment-container">
+    <h1>Assignment List</h1>
+    <table class="assignment-table">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>Title</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Score</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Physics</td>
+                <td>22/10/24 09:05</td>
+                <td>06/11/24 23:59</td>
+                <td><span class="score-unanswered">Unanswered</span></td>
+                <td><a href="assign-d.html" class="btn-as">Open</a></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Mathematics</td>
+                <td>17/10/24 09:06</td>
+                <td>24/10/24 21:00</td>
+                <td><span class="score-unanswered">Unanswered</span></td>
+                <td><a href="#" class="btn-as">Open</a></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Chemistry</td>
+                <td>16/10/24 08:06</td>
+                <td>20/10/24 08:06</td>
+                <td><span class="score-submitted">Submitted</span></td>
+                <td><a href="#" class="btn-as">Open</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    <!-- custom js file link -->
+    <script src="js/script.js"></script>
+    
+</body>
+</html>

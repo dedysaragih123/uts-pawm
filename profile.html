@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+
+    <!-- font awesome cdn link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- custom css file link -->
+     <link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<!-- header section starts -->
+<header class="header">
+    <section class="flex">
+        <!-- Menu button moved to the left -->
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="home.html" class="logo">ITB Virtual Lab</a>
+
+        <form action="" method="post" class="search-form">
+            <input type="text" name="search_box" placeholder="Cari Mata Kuliah..."
+            required maxlength="100">
+            <button type="submit" class="fas fa-search" name="search_box"></button>
+        </form>
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img src="images/pic-1.png" alt="">
+            <h3>Dedy Hofmanindo Saragih</h3>
+            <span>18222085 Student</span>
+            <a href="profile.html" class="btn">view profile</a>
+            <div class="flex-btn">
+                <a href="login.html" class="option-btn">login</a>
+                <a href="register.html" class="option-btn">register</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img src="images/pic-1.png" class="image" alt="">
+        <h3 class="name">Dedy Hofmanindo Saragih</h3>
+        <p class="role">18222085 Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="home.html"><i class="fas fa-home"></i><span>home</span></a>
+        <a href="courses.html"><i class="fas fa-graduation-cap"></i><span>my courses</span></a>
+        <a href="assignment.html"><i class="fas fa-tasks"></i><span>assignment</span></a>
+        <a href="exam.html"><i class="fas fa-clipboard-check"></i><span>exam</span></a>
+        <a href="practicum.html"><i class="fas fa-flask"></i><span>practicum</span></a>
+    </nav>
+</div>
+
+<section class="user-profile">
+
+    <h1 class="heading">your profile</h1>
+ 
+    <div class="info">
+ 
+       <div class="user">
+          <img src="images/pic-1.png" alt="">
+          <h3>Dedy Hofmanindo Saragih</h3>
+          <p>18222085 Student</p>
+          <a href="update.html" class="inline-btn">update profile</a>
+       </div>
+    
+       <div class="box-container">
+     
+        <div class="box">
+           <div class="flex">
+              <i class="fas fa-clock"></i> <!-- Ikon jam untuk waktu belajar -->
+              <div>
+                 <span>10 hours</span> <!-- Lama waktu belajar dalam 1 minggu -->
+                 <p>hours studied this week</p>
+              </div>
+           </div>
+           <a href="#" class="inline-btn">view study logs</a>
+        </div>
+     
+        <div class="box">
+           <div class="flex">
+              <i class="fas fa-tasks"></i> <!-- Ikon tugas untuk assignment completed -->
+              <div>
+                 <span>5</span>
+                 <p>assignments completed</p>
+              </div>
+           </div>
+           <a href="#" class="inline-btn">view completed assignments</a>
+        </div>
+     
+        <div class="box">
+           <div class="flex">
+              <i class="fas fa-book"></i> <!-- Mengganti ikon modul selesai dengan buku -->
+              <div>
+                 <span>5</span>
+                 <p>modules completed</p>
+              </div>
+           </div>
+           <a href="#" class="inline-btn">view completed modules</a>
+        </div>
+     
+        <div class="box">
+           <div class="flex">
+              <i class="fas fa-chart-bar"></i> <!-- Mengganti ikon progress dengan laptop -->
+              <div>
+                 <span>8</span>
+                 <p>modules in progress</p>
+              </div>
+           </div>
+           <a href="#" class="inline-btn">view modules in progress</a>
+        </div>
+     
+     </div>
+       
+
+<!-- custom js file link  -->
+<script src="js/script.js"></script>
+    
+</body>
+</html>
