@@ -9,10 +9,8 @@
 <body>
     <h1>Virtual Lab: Transverse Wave Simulation</h1>
 
-    <!-- Canvas for Wave Display -->
     <canvas id="waveCanvas"></canvas>
 
-    <!-- Wavelength, Frequency, Velocity Input Section -->
     <div class="flex-container">
         <div class="input-box">
             <label for="wavelength">Wavelength (λ):</label>
@@ -32,20 +30,17 @@
         <button onclick="startAnimation()">Start</button>
         <button onclick="stopAnimation()">Stop</button>
         <button id="reflectionBtn" onclick="simulateReflection()" disabled>Simulate Reflection</button>
-        <button class="reset-btn" onclick="resetForm()">Reset</button>
+        <button class="reset-btn" onclick="resetForm()">Restart</button>
     </div>
     
-    <!-- Warning Message Section -->
     <div id="warning" style="color: red; display: none;">Please enter a valid wavelength to simulate reflection.</div>
     
 
-    <!-- Result Section -->
     <div id="result"></div>
 
-    <!-- Educational Section -->
     <div id="education">
         <p>Transverse waves are characterized by oscillations that are perpendicular to the direction of wave propagation. In this simulation, you can observe how the wave moves, how wavelength (λ) affects the number of crests and troughs, and how frequency (f) determines wave speed (v).</p>
-        <p><b>Instructions:</b> Use the input fields to change the wavelength, frequency, and velocity. Press "Start" to observe the wave in motion, and "Simulate Reflection" to see how waves behave when reflected. Press "Reset" to start over.</p>
+        <p><b>Instructions:</b> Use the input fields to change the wavelength, frequency, and velocity. Press "Start" to observe the wave in motion, and "Simulate Reflection" to see how waves behave when reflected. Press "Restart" to start over.</p>
     </div>
 
     <div class="flex-container">

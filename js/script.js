@@ -29,22 +29,18 @@ toggleBtn.onclick = (e) =>{
 
 let profile = document.querySelector('.header2 .flex .profile');
 
-// Tambahkan juga pencarian elemen jika class header2 tidak ditemukan, fallback ke class header
 if (!profile) {
     profile = document.querySelector('.header .flex .profile');
 }
 
-// Event handler ketika tombol user-btn diklik
 document.querySelector('#user-btn').onclick = () => {
-    // Jika elemen profile ditemukan (baik di header atau header2)
     if (profile) {
-        profile.classList.toggle('active'); // Toggle kelas active untuk memunculkan atau menyembunyikan profile
+        profile.classList.toggle('active'); 
     }
     
-    // Optional: jika Anda menggunakan form pencarian, hapus class 'active' untuk menutup form
     let search = document.querySelector('.header2 .flex .search-form');
     if (search) {
-        search.classList.remove('active'); // Menutup form pencarian jika ada
+        search.classList.remove('active'); 
     }
 };
 
@@ -79,50 +75,46 @@ const uploadLabel = document.getElementById('upload-label');
 
 let uploadedFiles = [];
 
-// Trigger file input click when upload area is clicked
+
 uploadArea.addEventListener('click', () => {
     if (uploadedFiles.length < 3) {
-        fileUploadInput.click(); // Open file dialog if less than 3 files uploaded
+        fileUploadInput.click(); 
     } else {
-        alert('Maksimal 3 file'); // Warn user if trying to upload more than 3 files
+        alert('Maksimal 3 file'); 
     }
 });
 
-// Highlight upload area when dragging files over it
 uploadArea.addEventListener('dragover', (e) => {
-    e.preventDefault(); // Prevent default behavior
-    uploadArea.classList.add('dragover'); // Highlight the area
+    e.preventDefault(); 
+    uploadArea.classList.add('dragover'); 
 });
 
-// Remove highlight when dragging leaves
 uploadArea.addEventListener('dragleave', () => {
-    uploadArea.classList.remove('dragover'); // Remove highlight
+    uploadArea.classList.remove('dragover'); 
 });
 
-// Handle dropped files
+
 uploadArea.addEventListener('drop', (e) => {
-    e.preventDefault(); // Prevent default behavior
-    uploadArea.classList.remove('dragover'); // Remove highlight
-    if (uploadedFiles.length < 3) { // Allow dropping files only if less than 3 files uploaded
-        handleFiles(e.dataTransfer.files); // Process dropped files
+    e.preventDefault(); 
+    uploadArea.classList.remove('dragover'); 
+    if (uploadedFiles.length < 3) { 
+        handleFiles(e.dataTransfer.files); 
     } else {
-        alert('Maksimal 3 file'); // Warn if max files are already uploaded
+        alert('Maksimal 3 file'); 
     }
 });
 
-// Display the file name when a file is selected
 fileUploadInput.addEventListener('change', () => {
-    if (uploadedFiles.length < 3) { // Process selected files only if less than 3 files are uploaded
+    if (uploadedFiles.length < 3) { 
         handleFiles(fileUploadInput.files);
     } else {
-        alert('Maksimal 3 file'); // Warn if max files are already uploaded
+        alert('Maksimal 3 file'); 
     }
 });
 
-// Function to handle file uploads
 function handleFiles(files) {
     for (const file of files) {
-        if (uploadedFiles.length < 3) { // Check if the limit is not reached
+        if (uploadedFiles.length < 3) { 
             const fileType = file.type;
             if (['application/pdf', 
                  'application/msword', 
@@ -133,17 +125,16 @@ function handleFiles(files) {
                 uploadedFiles.push(file);
                 displayUploadedFile(file.name);
             } else {
-                alert('Only PDF, Word, JPG, and PNG files are allowed.'); // Alert for invalid files
+                alert('Only PDF, Word, JPG, and PNG files are allowed.'); 
             }
         } else {
-            alert('You can upload a maximum of 3 files.'); // Alert for maximum files
+            alert('You can upload a maximum of 3 files.'); 
             break;
         }
     }
-    toggleUploadButton(); // Update button state
+    toggleUploadButton(); 
 }
 
-// Function to display uploaded file names
 function displayUploadedFile(fileName) {
     const fileItem = document.createElement('div');
     fileItem.classList.add('file-item');
@@ -152,49 +143,43 @@ function displayUploadedFile(fileName) {
         <button class="remove-file" onclick="removeFile('${fileName}')">x</button>
     `;
     uploadedFilesContainer.appendChild(fileItem);
-    fileNameDisplay.textContent = ''; // Clear the single file name display
+    fileNameDisplay.textContent = '';
 }
 
-// Function to remove a file from the uploaded list
 function removeFile(fileName) {
-    uploadedFiles = uploadedFiles.filter(file => file.name !== fileName); // Remove file from array
-    toggleUploadButton(); // Update button state
-    uploadedFilesContainer.innerHTML = ''; // Clear displayed files
-    uploadedFiles.forEach(file => displayUploadedFile(file.name)); // Redisplay remaining files
+    uploadedFiles = uploadedFiles.filter(file => file.name !== fileName); 
+    toggleUploadButton(); 
+    uploadedFilesContainer.innerHTML = ''; 
+    uploadedFiles.forEach(file => displayUploadedFile(file.name)); 
 }
 
-// Function to toggle the upload button and label based on the number of files and textarea input
 function toggleUploadButton() {
-    const textarea = document.querySelector('textarea'); // Get the textarea
-    const hasText = textarea.value.trim().length > 0; // Check if textarea has text
+    const textarea = document.querySelector('textarea'); 
+    const hasText = textarea.value.trim().length > 0; 
     
-    // Enable submit button if there is text in the textarea or if there are uploaded files
     if (uploadedFiles.length <= 3 && (hasText || uploadedFiles.length > 0)) {
-        submitButton.disabled = false; // Enable submit button
-        uploadLabel.style.display = 'block'; // Show upload label
+        submitButton.disabled = false; 
+        uploadLabel.style.display = 'block'; 
     } else {
-        submitButton.disabled = true; // Disable submit button
+        submitButton.disabled = true; 
         if (uploadedFiles.length >= 3) {
-            uploadLabel.style.display = 'none'; // Hide upload label if max files reached
+            uploadLabel.style.display = 'none'; 
         }
     }
 
-    // Disable drag and drop area and upload button if max files reached
     if (uploadedFiles.length >= 3) {
-        uploadArea.style.pointerEvents = 'none'; // Disable drag and drop area
-        uploadLabel.style.pointerEvents = 'none'; // Disable upload button
+        uploadArea.style.pointerEvents = 'none'; 
+        uploadLabel.style.pointerEvents = 'none'; 
     } else {
-        uploadArea.style.pointerEvents = 'auto'; // Enable drag and drop area
-        uploadLabel.style.pointerEvents = 'auto'; // Enable upload button
+        uploadArea.style.pointerEvents = 'auto'; 
+        uploadLabel.style.pointerEvents = 'auto'; 
     }
 }
 
-// Enable submit button when text is entered in the textarea
 document.querySelector('textarea').addEventListener('input', toggleUploadButton);
 
-// Add event listener for the submit button
 submitButton.addEventListener('click', () => {
    if (!submitButton.disabled) {
-       window.location.href = 'submit-assign.html'; // Redirect to the submission page
+       window.location.href = 'submit-assign.html'; 
    }
 });

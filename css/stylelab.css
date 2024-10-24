@@ -1,37 +1,33 @@
-/* General Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    background: linear-gradient(135deg, #38699a 0%, #eee 100%);
     margin: 0;
     padding: 20px;
     text-align: center;
     color: #fff;
 }
 
-/* Header */
 h1 {
     font-size: 42px;
-    color: #f8f9fa;
+    color: #f7b731;
     margin-bottom: 30px;
     letter-spacing: 2px;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
     animation: fadeIn 1s ease-in-out;
 }
 
-/* Canvas Section */
 #waveCanvas {
     width: 100%;
     max-width: 800px;
     height: 200px;
-    border: 3px solid #f8f9fa;
+    border: 3px solid #3498db;
     border-radius: 10px;
-    background-color: #ffffff;
+    background-color: #eee;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     margin: 20px auto;
     animation: zoomIn 1.2s ease-in-out;
 }
 
-/* Flex Containers */
 .flex-container {
     display: flex;
     justify-content: center;
@@ -43,12 +39,11 @@ h1 {
     animation: fadeInUp 0.8s ease-in-out;
 }
 
-/* Input Boxes */
 .input-box {
     padding: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #f7b731;
     backdrop-filter: blur(10px);
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
     text-align: left;
@@ -63,15 +58,15 @@ h1 {
 label {
     font-weight: bold;
     font-size: 16px;
-    color: #f8f9fa;
+    color: #2c3e50;
     display: block;
     margin-bottom: 5px;
 }
 
 input[type="number"] {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 4px;
+    border: 1px solid #3498db;
     border-radius: 8px;
     outline: none;
     font-size: 16px;
@@ -84,10 +79,9 @@ input[type="number"]:focus {
     box-shadow: 0 0 10px rgba(52, 152, 219, 0.8);
 }
 
-/* Buttons */
 button {
     padding: 12px 25px;
-    background-color: #4CAF50;
+    background-color: #3498db;
     color: white;
     border: none;
     border-radius: 50px;
@@ -98,7 +92,7 @@ button {
 }
 
 button:hover {
-    background-color: #45a049;
+    background-color: #2c3e50;
     transform: translateY(-4px);
 }
 
@@ -107,10 +101,9 @@ button:hover {
 }
 
 button.reset-btn:hover {
-    background-color: #c0392b;
+    background-color: #2c3e50;
 }
 
-/* Warning Message */
 #warning {
     color: #e74c3c;
     font-size: 16px;
@@ -119,11 +112,10 @@ button.reset-btn:hover {
     animation: shake 0.5s ease-in-out;
 }
 
-/* Result and Education Section */
 #result, #education {
     margin-top: 30px;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: #eee;
     backdrop-filter: blur(10px);
     border-radius: 10px;
     box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
@@ -141,11 +133,10 @@ button.reset-btn:hover {
 #education p {
     margin: 10px 0;
     font-size: 16px;
-    color: #f8f9fa;
+    color: #2c3e50;
     line-height: 1.6;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     h1 {
         font-size: 36px;
@@ -172,7 +163,7 @@ button.reset-btn:hover {
 /* Style for 'Back to Home' Button */
 .btn-home {
     padding: 12px 25px;
-    background-color: #3498db;
+    background-color: #f7b731;
     color: white;
     border: none;
     border-radius: 50px;
@@ -185,7 +176,7 @@ button.reset-btn:hover {
 }
 
 .btn-home:hover {
-    background-color: #2980b9;
+    background-color: #2c3e50;
     transform: translateY(-4px);
 }
 

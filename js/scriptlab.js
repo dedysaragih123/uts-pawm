@@ -8,9 +8,8 @@ let phase = 0;
 let speed = 0.05;
 let isReflecting = false;
 
-// Function to draw transverse wave
 function drawTransverseWave(wavelength, phaseShift, reflecting = false) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before drawing
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.beginPath();
     for (let x = 0; x < canvas.width; x++) {
         const y = 100 + 50 * Math.sin((2 * Math.PI * (x + phaseShift)) / (wavelength * 100));
@@ -18,7 +17,6 @@ function drawTransverseWave(wavelength, phaseShift, reflecting = false) {
     }
     ctx.stroke();
 
-    // If reflecting, draw the reflection (inverted wave)
     if (reflecting) {
         ctx.beginPath();
         for (let x = canvas.width; x >= 0; x--) {
@@ -29,47 +27,42 @@ function drawTransverseWave(wavelength, phaseShift, reflecting = false) {
     }
 }
 
-// Function to update the wave based on user input
 function updateWave() {
     const wavelength = parseFloat(document.getElementById('wavelength').value);
     if (!isNaN(wavelength) && wavelength > 0) {
         drawTransverseWave(wavelength, phase, isReflecting);
     } else {
-        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas if wavelength is not valid
+        ctx.clearRect(0, 0, canvas.width, canvas.height); 
     }
 }
 
-// Function to animate the wave
 function animateWave() {
     const wavelength = parseFloat(document.getElementById('wavelength').value);
-    if (isNaN(wavelength) || wavelength <= 0) return; // Avoid animation if input is invalid
+    if (isNaN(wavelength) || wavelength <= 0) return; 
     function step() {
         drawTransverseWave(wavelength, phase, isReflecting);
-        phase += speed; // Phase shift based on speed
+        phase += speed;
         animationId = requestAnimationFrame(step);
     }
     animationId = requestAnimationFrame(step);
 }
 
-// Function to start the animation
 function startAnimation() {
     const wavelength = parseFloat(document.getElementById('wavelength').value);
     const warning = document.getElementById('warning');
     
     if (!wavelength || isNaN(wavelength) || wavelength <= 0) {
-        // Show the warning only when user presses the button with invalid wavelength
         warning.style.display = 'block';
-        return; // Stop execution if the input is invalid
+        return; 
     }
 
-    warning.style.display = 'none'; // Hide the warning if the input is valid
+    warning.style.display = 'none';
     if (!animationId) {
         animateWave();
         showEducationalInfo("The wave is in motion. Observe how the wave's crests and troughs move through the medium.");
     }
 }
 
-// Function to stop the animation
 function stopAnimation() {
     if (animationId) {
         cancelAnimationFrame(animationId);
@@ -78,20 +71,18 @@ function stopAnimation() {
     }
 }
 
-// Function to simulate wave reflection
 function simulateReflection() {
     const wavelength = parseFloat(document.getElementById('wavelength').value);
     const warning = document.getElementById('warning');
     
     if (!wavelength || isNaN(wavelength) || wavelength <= 0) {
-        // Show the warning only when user presses the button with invalid wavelength
         warning.style.display = 'block';
-        return; // Stop execution if the input is invalid
+        return; 
     }
 
-    warning.style.display = 'none'; // Hide the warning if the input is valid
-    isReflecting = !isReflecting; // Toggle reflection
-    updateWave(); // Re-draw the wave with/without reflection
+    warning.style.display = 'none'; 
+    isReflecting = !isReflecting;
+    updateWave(); 
     showEducationalInfo(isReflecting ? "Reflection enabled. The wave now behaves as if it hits a boundary and reflects back." : "Reflection disabled.");
 }
 
@@ -124,28 +115,22 @@ function calculateWave() {
 
     document.getElementById('result').innerText = result;
 
-    // Update wave after calculation
     updateWave();
 }
 
-// Function to reset all inputs and canvas
 function resetForm() {
-    // Reset input fields
     document.getElementById('wavelength').value = '';
     document.getElementById('frequency').value = '';
     document.getElementById('velocity').value = '';
-    document.getElementById('warning').style.display = 'none'; // Hide the warning on reset
+    document.getElementById('warning').style.display = 'none'; 
     
-    // Stop the animation if it's running
     if (animationId) {
         cancelAnimationFrame(animationId);
         animationId = null;
     }
 
-    // Clear the canvas
     ctx.clearRect(0, 0, canvas.width, canvas.height); 
 
-    // Reset other states
     isReflecting = false;
     speed = 0.05;
     phase = 0;
@@ -153,19 +138,16 @@ function resetForm() {
     showEducationalInfo("All parameters have been reset. You can start a new simulation.");
 }
 
-// Function to show educational information
 function showEducationalInfo(message) {
     document.getElementById('education').innerHTML = `<p>${message}</p>`;
 }
 
-// Function to check if buttons can be enabled
 function checkInputs() {
     const wavelength = document.getElementById('wavelength').value;
     const reflectionBtn = document.getElementById('reflectionBtn');
     const startBtn = document.getElementById('startBtn');
     const stopBtn = document.getElementById('stopBtn');
     
-    // Enable/disable the buttons based on the wavelength value
     if (!wavelength || isNaN(wavelength) || wavelength <= 0) {
         reflectionBtn.disabled = true;
         startBtn.disabled = true;
@@ -177,16 +159,12 @@ function checkInputs() {
     }
 }
 
-// Update checkInputs call when wavelength input changes
 document.getElementById('wavelength').addEventListener('input', checkInputs);
 document.getElementById('wavelength').addEventListener('input', updateWave);
 document.getElementById('frequency').addEventListener('input', updateWave);
 document.getElementById('velocity').addEventListener('input', updateWave);
 
-// Initialize wave on page load
 updateWave();
-
-// Initialize the input check on page load
 checkInputs();
 
 function startAnimation() {
@@ -199,13 +177,13 @@ function startAnimation() {
     }
 
     warning.style.display = 'none';
-    playSoundEffect();  // Tambahkan efek suara saat animasi dimulai
+    playSoundEffect(); 
     if (!animationId) {
         animateWave();
     }
 }
 
 function playSoundEffect() {
-    const audio = new Audio('sound/start-sound.wav'); // Tambahkan file suara di folder yang sesuai
+    const audio = new Audio('sound/start-sound.wav'); 
     audio.play();
 }
