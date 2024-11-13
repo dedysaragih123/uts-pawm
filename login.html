@@ -3,18 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>courses</title>
+    <title>Login</title>
 
     <!-- font awesome cdn link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
     <!-- custom css file link -->
-     <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- header section starts -->
 <header class="header2">
     <section class="flex">
         <a href="home.html" class="logo">ITB Virtual Lab</a>
@@ -25,28 +23,88 @@
         </div>
 
         <div class="profile">
-            <img src="images/pic-1.png" alt="">
+            <img src="images/pic-1.png" alt="Profile Picture">
             <div class="flex-btn">
-                <a href="login.html" class="option-btn">login</a>
-                <a href="register.html" class="option-btn">register</a>
+                <a href="login.html" class="option-btn">Login</a>
+                <a href="register.html" class="option-btn">Register</a>
             </div>
         </div>
     </section>
 </header>
 
 <section class="form-container">
-
-    <form action="" method="post" enctype="multipart/form-data">
+    <!-- Updated form action to point to backend login route -->
+    <form action="http://localhost:3001/api/users/login" method="post">
        <h3>LOGIN</h3>
-       <p>email <span>*</span></p>
-       <input type="email" name="email" placeholder="enter your email" required maxlength="50" class="box">
-       <p>password <span>*</span></p>
-       <input type="password" name="pass" placeholder="enter your password" required maxlength="20" class="box">
-       <input type="submit" value="login" name="submit" class="btn">
+       <p>Email <span>*</span></p>
+       <input type="email" name="email" placeholder="Enter your email" required maxlength="50" class="box">
+       <p>Password <span>*</span></p>
+       <input type="password" name="password" placeholder="Enter your password" required maxlength="20" class="box">
+       <input type="submit" value="Login" name="submit" class="btn">
     </form>
 </section>
 
-<!-- custom js file link  -->
+<!-- custom js file link -->
 <script src="js/script.js"></script>
 
-</div>
+<script>
+    document.querySelector('form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        console.log("Form submission triggered"); // Debugging log
+        const form = e.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        
+        console.log("Email:", email); // Debugging log
+        console.log("Password:", password); // Debugging log
+
+        try {
+            // Send login data to the server
+            const response = await fetch("http://localhost:3001/api/users/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+            if (response.ok) {
+                alert(data.message);
+                console.log("Login successful, redirecting...");
+                window.location.href = "home.html"; // Redirect to home page on success
+            } else {
+                console.log("Login failed:", data.error);
+                alert(data.error); // Show error message if login failed
+            }
+        } catch (error) {
+            console.error("Error occurred during login request:", error);
+            alert("Failed to connect to the server.");
+        }
+    });
+</script>
+
+<script>
+    document.querySelector('form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form);
+
+        const response = await fetch("http://localhost:3001/api/users/register", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+            // Redirect to login page on success
+            window.location.href = "login.html";
+        } else {
+            // Show error message
+            alert(data.error || "Failed to register");
+        }
+    });
+</script>
+
+
+
+</body>
+</html>
