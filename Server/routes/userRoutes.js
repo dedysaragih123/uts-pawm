@@ -6,60 +6,36 @@ const multer = require('multer');
 // Configure multer to store uploaded files in the "uploads" directory
 const upload = multer({ dest: 'uploads/' });
 
-// Registration route with file upload handling
+// userRoutes.js (Server-side code)
 router.post('/register', upload.single('profile_image'), async (req, res) => {
     const { name, email, password, c_password } = req.body;
 
-    // Step 1: Validate required fields
     if (!name || !email || !password || !c_password) {
-        console.log("Missing required fields: name, email, or password.");
         return res.status(400).json({ error: "All fields are required" });
     }
 
-    // Step 2: Validate password confirmation
     if (password !== c_password) {
-        console.log("Password and confirmation do not match.");
         return res.status(400).json({ error: "Passwords do not match" });
     }
 
     try {
-        // Step 3: Connect to the database
         const client = await req.pool.connect();
-        console.log("Database connection established.");
-
-        // Step 4: Check if the email already exists
-        console.log("Checking if email exists...");
+        
         const userExists = await client.query('SELECT * FROM users WHERE email = $1', [email]);
         if (userExists.rows.length > 0) {
-            console.log("Email already exists.");
-            return res.status(400).json({ message: 'Email already exists' });
+            // Return a 409 Conflict status specifically for duplicate emails
+            return res.status(409).json({ message: 'Email already exists' });
         }
-        console.log("Email check passed.");
 
-        // Step 5: Hash the password
-        console.log("Hashing password...");
         const hashedPassword = await bcrypt.hash(password, 10);
-        console.log("Password hashed successfully.");
+        const profileImagePath = req.file ? req.file.path.replace(/\\/g, '/') : null;
 
-        // Step 6: Prepare the profile image (if uploaded)
-        let profileImagePath = null;
-        if (req.file) {
-            profileImagePath = req.file.path; // File path of the uploaded profile image
-            console.log("Profile image uploaded at:", profileImagePath);
-        }
-
-        // Step 7: Insert the new user into the database
-        console.log("Inserting user into database...");
         await client.query(
             'INSERT INTO users (name, email, password, profile_image) VALUES ($1, $2, $3, $4)',
             [name, email, hashedPassword, profileImagePath]
         );
 
-        console.log("User registered successfully.");
-        
-        // Instead of sending a JSON response, redirect to login.html
-        res.redirect('/login.html'); // Redirect to login page after registration
-
+        res.status(200).json({ message: 'Registration successful' });
     } catch (error) {
         console.error("Detailed registration error:", error);
         res.status(500).json({ error: 'Failed to register user' });
@@ -67,41 +43,59 @@ router.post('/register', upload.single('profile_image'), async (req, res) => {
 });
 
 
-// Login Route
+// 2. New route to get user profile data
+router.get('/profile/:id', async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const client = await req.pool.connect();
+        const result = await client.query(
+            'SELECT name, email, profile_image FROM users WHERE id = $1',
+            [userId]
+        );
+
+        if (result.rows.length > 0) {
+            res.status(200).json(result.rows[0]);
+        } else {
+            res.status(404).json({ message: 'User not found' });
+        }
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+        res.status(500).json({ error: 'Failed to fetch user profile' });
+    }
+});
+
+// Login route
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    // Step 1: Validate input
     if (!email || !password) {
-        return res.status(400).json({ error: "Email and password are required" });
+        return res.status(400).end();
     }
 
     try {
-        // Step 2: Connect to the database and find the user by email
         const client = await req.pool.connect();
         const userResult = await client.query('SELECT * FROM users WHERE email = $1', [email]);
 
-        // Check if the user exists
         if (userResult.rows.length === 0) {
-            return res.status(400).json({ error: "User not found" });
+            return res.status(400).end();
         }
 
         const user = userResult.rows[0];
-
-        // Step 3: Verify the password
         const isPasswordValid = await bcrypt.compare(password, user.password);
+
         if (!isPasswordValid) {
-            return res.status(400).json({ error: "Invalid credentials" });
+            return res.status(400).end();
         }
 
-        // Step 4: Send a success response
-        res.status(200).json({ message: "Login successful", userId: user.id });
-
+        req.session.userId = user.id;
+        res.status(200).end();
     } catch (error) {
         console.error("Login error:", error);
-        res.status(500).json({ error: "Failed to log in" });
+        res.status(500).end();
     }
 });
+
 
 // Logout Route
 router.post('/logout', (req, res) => {
@@ -112,5 +106,36 @@ router.post('/logout', (req, res) => {
         res.redirect('/login.html'); // Redirect to login after logging out
     });
 });
+
+// Ensure this code is inside userRoutes.js
+const path = require('path');
+
+router.get('/profile', async (req, res) => {
+    try {
+        const userId = req.session.userId; // Assuming userId is stored in the session
+        if (!userId) {
+            return res.status(401).json({ error: 'Unauthorized' });
+        }
+
+        const client = await req.pool.connect();
+        const userResult = await client.query('SELECT name, profile_image FROM users WHERE id = $1', [userId]);
+
+        if (userResult.rows.length === 0) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        const user = userResult.rows[0];
+        
+        // Convert the image path to a format accessible by the client if necessary
+        user.profile_image = user.profile_image ? path.join('/uploads', path.basename(user.profile_image)) : null;
+
+        res.json(user);
+    } catch (error) {
+        console.error("Error fetching user profile:", error);
+        res.status(500).json({ error: 'Failed to retrieve profile' });
+    }
+});
+
+
 
 module.exports = router;

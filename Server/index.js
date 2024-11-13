@@ -13,7 +13,7 @@ const PORT = 3001; // Set the port number for the server
 
 // Configure CORS with specific origin
 app.use(cors({
-    origin: ['http://localhost:3000', 'null'], // Allow requests from both localhost and file origins
+    origin: ['http://localhost:3000', 'https://085-physics-virtual-49hghpnmc-dedys-projects-a843acc4.vercel.app/'], // Allow requests from both localhost and file origins
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
@@ -70,6 +70,7 @@ app.use(express.static(path.join(__dirname, '..')));
 app.use('/css', express.static(path.join(__dirname, '../css')));
 app.use('/js', express.static(path.join(__dirname, '../js')));
 app.use('/images', express.static(path.join(__dirname, '../images')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Routes for handling user-related requests
 app.use('/api/users', userRoutes);
