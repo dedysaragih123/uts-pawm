@@ -1,4 +1,4 @@
-**Tugas 1 II3140 Pengembangan Aplikasi Website dan Mobile**  
+**Tugas 2 II3140 Pengembangan Aplikasi Website dan Mobile**  
 Nama: Dedy Hofmanindo Saragih  
 NIM: 18222085
 
