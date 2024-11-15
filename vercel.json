@@ -7,7 +7,10 @@
       },
       {
         "src": "Server/index.js",
-        "use": "@vercel/node"
+        "use": "@vercel/node",
+        "config":{
+          "buildCommand" : "cd ./server && npm install & npm run nyala"
+        }
       }
     ],
     "routes": [

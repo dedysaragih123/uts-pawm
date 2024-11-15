@@ -9,7 +9,7 @@ const userRoutes = require('./routes/userRoutes');
 const auth = require('./middleware/auth');
 const quizRoutes = require('./routes/quizRoutes');
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 
 // Configure CORS with specific origin
 app.use(cors({
