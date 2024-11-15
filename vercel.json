@@ -9,7 +9,8 @@
         "src": "Server/index.js",
         "use": "@vercel/node",
         "config":{
-          "buildCommand" : "cd ./server && npm install & npm run nyala"
+          "buildCommand" : "cd ./server && npm install & npm run nyala",
+          "command" : "npm run nyala"
         }
       }
     ],
