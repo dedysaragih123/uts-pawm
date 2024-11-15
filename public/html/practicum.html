@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practicum</title>
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+
+<!-- Header section starts -->
+<header class="header">
+    <section class="flex">
+        <!-- Menu button moved to the left -->
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="/html/home.html" class="logo">ITB Virtual Lab</a>
+
+        <form action="" method="post" class="search-form" onsubmit="searchCourses(event)">
+            <input type="text" id="searchBox" placeholder="Cari Mata Kuliah..." maxlength="100">
+            <button type="submit" class="fas fa-search"></button>
+        </form> 
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img id="headerProfileImage" src="/images/pic-1.png" alt="Profile Picture">
+            <h3 id="headerUserName">User Name</h3>
+            <span id="headerUserRole">Student</span>
+            <a href="/html/profile.html" class="btn">View Profile</a>
+            <div class="flex-btn">
+                <a href="/html/login.html" class="option-btn">Logout</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img id="sidebarProfileImage" src="/images/pic-1.png" class="image" alt="Profile Picture">
+        <h3 id="sidebarUserName" class="name">User Name</h3>
+        <p id="sidebarUserRole" class="role">Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="/html/home.html"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="/html/courses.html"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+        <a href="/html/exam.html"><i class="fas fa-clipboard-check"></i><span>Exam</span></a>
+        <a href="/html/practicum.html"><i class="fas fa-flask"></i><span>Practicum</span></a>
+    </nav>
+</div>
+
+<section class="courses">
+    <h1 class="heading">Practicum</h1>
+
+    <div class="box-container">
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Boby</h3>
+                    <span>Physics Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/physics.png" alt="">
+            </div>
+            <h3 class="title">Physics</h3>
+            <a href="/html/prac-d.html" class="inline-btn">Start</a>
+        </div>
+
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Defita</h3>
+                    <span>Mathematics Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/mathematics.png" alt="">
+            </div>
+            <h3 class="title">Mathematics</h3>
+            <a href="#" class="inline-btn" onclick="showDevelopmentNotification()">Start</a>
+        </div>
+
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Grandprix</h3>
+                    <span>Chemistry Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/chemistry.png" alt="">
+            </div>
+            <h3 class="title">Chemistry</h3>
+            <a href="#" class="inline-btn" onclick="showDevelopmentNotification()">Start</a>
+        </div>
+    </div>
+    
+</section>
+
+<!-- Custom JS file link  -->
+<script src="/js/script.js"></script>
+
+<!-- Script for loading user profile and development notification -->
+<script>
+    function showDevelopmentNotification() {
+        alert("This practicum is currently under development.");
+    }
+
+    // Function to load and display user profile data
+    async function loadUserProfile() {
+        try {
+            const response = await fetch("/api/users/profile", { credentials: "include" });
+            if (response.ok) {
+                const user = await response.json();
+
+                // Update profile information
+                document.getElementById("headerUserName").textContent = user.name;
+                document.getElementById("headerProfileImage").src = user.profileImage || "/images/pic-1.png";
+
+                document.getElementById("sidebarUserName").textContent = user.name;
+                document.getElementById("sidebarUserRole").textContent = user.role || "Student";
+                document.getElementById("sidebarProfileImage").src = user.profileImage || "/images/pic-1.png";
+            } else {
+                console.error("Failed to load user profile:", response.status);
+            }
+        } catch (error) {
+            console.error("Error loading user profile:", error);
+        }
+    }
+
+    // Load user profile on page load
+    window.addEventListener("DOMContentLoaded", loadUserProfile);
+
+    function searchCourses(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const query = document.getElementById('searchBox').value.trim().toLowerCase();
+        const courses = document.querySelectorAll('.courses .box-container .box'); // Select all course boxes
+
+        if (!query) {
+            // If the search box is cleared and user submits, show all courses
+            courses.forEach(course => {
+                course.style.display = ''; // Reset display to show all courses
+            });
+            return; // Exit the function early
+        }
+
+        // Filter courses based on the search query
+        courses.forEach(course => {
+            const title = course.querySelector('.title').textContent.toLowerCase();
+            const lecturer = course.querySelector('.info h3').textContent.toLowerCase();
+
+            // Show or hide the course based on the query match
+            if (title.includes(query) || lecturer.includes(query)) {
+                course.style.display = ''; // Show the course
+            } else {
+                course.style.display = 'none'; // Hide the course
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

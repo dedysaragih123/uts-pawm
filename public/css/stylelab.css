@@ -224,3 +224,33 @@ button.reset-btn:hover {
         transform: translateX(-5px);
     }
 }
+
+/* Quiz Mode Styles */
+#quiz-section {
+    color: #000; /* Set all text within quiz mode to black */
+}
+
+#quiz-section h2 {
+    color: #f7b731; /* Keep the header text color */
+}
+
+#quiz-questions p,
+#quiz-questions input[type="number"] {
+    color: #000; /* Set question text and input color to black */
+}
+
+#quiz-score {
+    color: #000; /* Set quiz score text color to black */
+}
+
+#quiz-section button {
+    color: #fff; /* Ensure button text remains white for visibility */
+}
+
+#quiz-section .question-box p {
+    color: #000; /* Ensure question text color is black */
+}
+
+#quiz-section input[type="number"]::placeholder {
+    color: #333; /* Dark placeholder for input fields */
+}

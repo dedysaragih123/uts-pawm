@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Physics</title>
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="/css/style.css"> <!-- Adjusted path for CSS -->
+</head>
+<body>
+
+<!-- Header section starts -->
+<header class="header">
+    <section class="flex">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="/html/home.html" class="logo">ITB Virtual Lab</a>
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img src="/images/pic-1.png" alt="Profile Picture" id="profileImage">
+            <h3 id="headerUserName">User Name</h3>
+            <span id="headerUserRole">Student</span>
+            <a href="/html/profile.html" class="btn">View Profile</a>
+            <div class="flex-btn">
+                <a href="/html/login.html" class="option-btn">Logout</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img src="/images/pic-1.png" class="image" alt="Profile Picture" id="sidebarProfileImage">
+        <h3 class="name" id="sidebarUserName">User Name</h3>
+        <p class="role" id="sidebarUserRole">Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="/html/home.html"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="/html/courses.html"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+        <a href="/html/exam.html"><i class="fas fa-clipboard-check"></i><span>Exam</span></a>
+        <a href="/html/practicum.html"><i class="fas fa-flask"></i><span>Practicum</span></a>
+    </nav>
+</div>
+
+<section class="view-course">
+    <h1 class="heading">Physics</h1>
+    <div class="row">
+        <div class="column">
+            <div class="thumb">
+                <img src="/images/physics.png" alt="Physics">
+                <span>10 modules</span>
+            </div>
+        </div>
+
+        <div class="column">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="Lecturer Picture">
+                <div>
+                    <h3>Boby</h3>
+                    <span>Physics Lecturer</span>
+                </div>
+            </div>
+
+            <div class="details">
+                <h3>A Glimpse of Physics</h3>
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Esse facilis, modi dicta aliquam at libero consequuntur tempore distinctio, odit enim maiores ad? Architecto pariatur aspernatur amet adipisci nobis! Voluptatibus, error?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, doloremque ea neque dolores laborum quasi sint, distinctio, ipsa error sit quo nisi veritatis aspernatur quaerat quod maiores suscipit consectetur eos.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="course-details">
+    <h1 class="heading">Modules</h1>
+    <div class="box-container">
+        <!-- Each module link triggers a development notification -->
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="Module 01">
+            <h3>Module 01 - Dasar Pengukuran dan Ketidakpastian</h3>
+        </a>
+        <!-- Repeat for other modules -->
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="Module 02">
+            <h3>Module 02 - Osilasi Harmonik Sederhana (Osilasi Pegas)</h3>
+        </a>
+        
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="">
+            <h3>Module 03 - Osilasi Harmonik Sederhana (Bandul Fisis)</h3>
+        </a>
+
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="">
+            <h3>Module 04 - Momen Inersia</h3>
+        </a>
+
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="">
+            <h3>Module 05 - Modulus Young</h3>
+        </a>
+
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="">
+            <h3>Module 06 - Modulus Puntir</h3>
+        </a>
+
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="">
+            <h3>Module 07 - Gelombang Berdiri Pada Tali</h3>
+        </a>
+
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="">
+            <h3>Module 08 - Dinamika Usaha dan Energi</h3>
+        </a>
+
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="">
+            <h3>Module 09 - Resonansi Gelombang Bunyi</h3>
+        </a>
+
+        <a class="box" href="#" onclick="showDevelopmentNotification(event)">
+            <img src="/images/physics.png" alt="">
+            <h3>Module 10 - Pesawat Atwood</h3>
+        </a>
+    </div>
+</section>
+
+<!-- Custom JS file link -->
+<script src="/js/script.js"></script>
+
+<!-- JavaScript for Dynamic Profile and Development Notification -->
+<script>
+    // Load user profile data
+    async function loadUserProfile() {
+        try {
+            const response = await fetch("/api/users/profile", { credentials: "include" });
+            if (response.ok) {
+                const user = await response.json();
+
+                // Update profile data in both header and sidebar
+                document.getElementById("headerUserName").textContent = user.name;
+                document.getElementById("sidebarUserName").textContent = user.name;
+                document.getElementById("headerUserRole").textContent = user.role || "Student";
+                document.getElementById("sidebarUserRole").textContent = user.role || "Student";
+                document.getElementById("profileImage").src = user.profileImage || "/images/pic-1.png";
+                document.getElementById("sidebarProfileImage").src = user.profileImage || "/images/pic-1.png";
+            } else {
+                console.error("Failed to load user profile:", response.status);
+            }
+        } catch (error) {
+            console.error("Error loading user profile:", error);
+        }
+    }
+
+    // Show development notification
+    function showDevelopmentNotification(event) {
+        event.preventDefault();
+        alert("This module is currently under development.");
+    }
+
+    // Load profile on page load
+    window.addEventListener("DOMContentLoaded", loadUserProfile);
+</script>
+
+</body>
+</html>

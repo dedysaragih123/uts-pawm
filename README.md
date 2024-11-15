@@ -7,47 +7,37 @@ NIM: 18222085
 ```plaintext
 085-Physics Virtual Lab/
 │
-├── css/
-│   ├── style.css
-│   ├── stylelab.css
+├── .git/                       
+├── .gitignore                  
+├── package-lock.json         
+├── package.json                
 │
-├── images/
-│   ├── AI.png
-│   ├── basic-programming.png
-│   ├── biology.png
-│   ├── chemistry.png
-│   ├── computational-thinking.png
-│   ├── design-engineering.png
-│   ├── english.png
-│   ├── indonesian.png
-│   ├── mathematics.png
-│   ├── pancasila.png
-│   ├── physics.png
-│   ├── pic-1.png
-│   ├── sport.png
-│   └── user.png
+├── public/                   
+│   ├── css/                   
+│   │   ├── style.css           
+│   │   └── stylelab.css        
+│   ├── images/                 
+│   │   ├── AI.png              
+│   │   ├── basic-programming.png 
+│   │   └── ...                 
+│   ├── js/                    
+│   │   ├── script.js          
+│   │   └── scriptlab.js       
+│   ├── sound/                  
+│   │   └── (sound files)       
+│   └── html/                   
+│       ├── allcourses.html     
+│       ├── assign-d.html     
+│       ├── ...                 
 │
-├── js/
-│   ├── script.js
-│   ├── scriptlab.js
-│
-├── sound/
-│   └── start-sound.mp3
-│
-├── allcourses.html
-├── assign-d.html
-├── assignment.html
-├── courses.html
-├── exam.html
-├── exam-d.html
-├── home.html
-├── login.html
-├── physics.html
-├── prac-d.html
-├── practicum.html
-├── profile.html
-├── register.html
-├── submit-assign.html
-├── submit-exam.html
-├── update.html
-└── vercel.json
+├── Server/                     
+│   ├── middleware/            
+│   │   └── auth.js             
+│   ├── models/                 
+│   │   └── user.js            
+│   ├── routes/                
+│   │   └── userRoutes.js       
+│   ├── index.js                
+│   └── package.json           
+└── README.md                   
+

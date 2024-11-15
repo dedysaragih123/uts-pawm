@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Exam</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .exam-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .question {
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        #submitBtn {
+            background-color: #2196F3;
+        }
+
+        #submitBtn:hover {
+            background-color: #1e88e5;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        #score {
+            color: #4CAF50;
+            font-size: 1.5rem;
+        }
+
+        #homeBtn {
+            margin-top: 20px;
+            background-color: #ff9800;
+        }
+
+        #homeBtn:hover {
+            background-color: #fb8c00;
+        }
+    </style>
+</head>
+<body>
+
+<div class="exam-container">
+    <h1>Physics Exam</h1>
+
+    <!-- Questions will be shown one by one -->
+    <div class="question active" id="question-1">
+        <h3>1. What is Newton's First Law?</h3>
+        <label><input type="radio" name="q1" value="correct"> An object will remain at rest or in uniform motion unless acted upon by a force.</label><br>
+        <label><input type="radio" name="q1" value="incorrect"> An object will accelerate indefinitely.</label>
+    </div>
+
+    <div class="question" id="question-2">
+        <h3>2. What is the speed of light?</h3>
+        <label><input type="radio" name="q2" value="correct"> 299,792,458 m/s</label><br>
+        <label><input type="radio" name="q2" value="incorrect"> 300,000,000 m/s</label>
+    </div>
+
+    <div class="question" id="question-3">
+        <h3>3. What is the formula for force?</h3>
+        <label><input type="radio" name="q3" value="correct"> F = ma (Force = Mass x Acceleration)</label><br>
+        <label><input type="radio" name="q3" value="incorrect"> F = mv (Force = Mass x Velocity)</label>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="navigation-buttons">
+        <button id="prevBtn" onclick="prevQuestion()" disabled>Previous</button>
+        <button id="nextBtn" onclick="nextQuestion()">Next</button>
+        <button id="submitBtn" onclick="submitExam()">Submit</button>
+    </div>
+
+    <!-- Display Final Score and Home Button -->
+    <div id="result" style="display:none;">
+        <h2>Your Score: <span id="score"></span>/3</h2>
+        <button id="homeBtn" onclick="goToHome()">Go to Home</button>
+    </div>
+</div>
+
+<script>
+    let currentQuestion = 1;
+    const totalQuestions = 3;
+    let isSubmitted = false;
+
+    function showQuestion(questionNumber) {
+        for (let i = 1; i <= totalQuestions; i++) {
+            document.getElementById(`question-${i}`).style.display = 'none';
+        }
+        document.getElementById(`question-${questionNumber}`).style.display = 'block';
+
+        document.getElementById('prevBtn').disabled = questionNumber === 1;
+        document.getElementById('nextBtn').style.display = questionNumber === totalQuestions ? 'none' : 'inline-block';
+        document.getElementById('submitBtn').style.display = questionNumber === totalQuestions && !isSubmitted ? 'inline-block' : 'none';
+    }
+
+    function nextQuestion() {
+        if (currentQuestion < totalQuestions) {
+            currentQuestion++;
+            showQuestion(currentQuestion);
+        }
+    }
+
+    function prevQuestion() {
+        if (currentQuestion > 1) {
+            currentQuestion--;
+            showQuestion(currentQuestion);
+        }
+    }
+
+    function calculateScore() {
+        let score = 0;
+        for (let i = 1; i <= totalQuestions; i++) {
+            const answer = document.querySelector(`input[name="q${i}"]:checked`);
+            if (answer && answer.value === 'correct') {
+                score++;
+            }
+        }
+        return score;
+    }
+
+    async function submitExam() {
+        const score = calculateScore();
+        const examId = 1;
+        
+        try {
+            const response = await fetch('/api/exams/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ exam_id: examId, score })
+            });
+
+            if (response.ok) {
+                isSubmitted = true;
+                document.getElementById('score').textContent = score;
+                document.getElementById('result').style.display = 'block';
+                lockAnswers();
+                document.getElementById('submitBtn').disabled = true;
+            } else {
+                const errorData = await response.json();
+                console.error('Submission error:', errorData);
+                alert('Failed to submit exam. Please try again.');
+            }
+        } catch (error) {
+            console.error("Error submitting exam:", error);
+            alert('An error occurred during submission. Please try again.');
+        }
+    }
+
+    function lockAnswers() {
+        for (let i = 1; i <= totalQuestions; i++) {
+            const radios = document.querySelectorAll(`input[name="q${i}"]`);
+            radios.forEach(radio => radio.disabled = true);
+        }
+    }
+
+    function goToHome() {
+        window.location.href = '/html/home.html';
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+        const examId = 1;
+        try {
+            const response = await fetch(`/api/exams/check-submission?exam_id=${examId}`);
+            const data = await response.json();
+
+            if (data.submitted) {
+                alert("You have already submitted this exam and cannot take it again.");
+                window.location.href = "/html/home.html";
+            }
+        } catch (error) {
+            console.error("Error checking submission status:", error);
+        }
+    });
+
+    showQuestion(currentQuestion);
+</script>
+</body>
+</html>

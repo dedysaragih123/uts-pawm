@@ -187,3 +187,82 @@ function playSoundEffect() {
     const audio = new Audio('sound/start-sound.wav'); 
     audio.play();
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    checkQuizSubmissionStatus();
+});
+
+function checkQuizSubmissionStatus() {
+    fetch('/api/quiz/check-submission?quiz_id=1')  // Sesuaikan `quiz_id` sesuai kebutuhan
+        .then(response => response.json())
+        .then(data => {
+            const submitButton = document.getElementById("submitQuizButton");
+            if (data.submitted && submitButton) {
+                submitButton.disabled = true; // Nonaktifkan tombol jika sudah submit
+            }
+        })
+        .catch(error => console.error("Error checking quiz submission status:", error));
+}
+
+function submitQuiz() {
+    let score = 0;
+    const userAnswers = [];
+
+    quizQuestions.forEach((item, index) => {
+        const userAnswer = parseFloat(document.getElementById(`answer-${index}`).value);
+
+        if (userAnswer === item.answer) {
+            score += 20;
+        }
+
+        userAnswers.push({ question: item.question, userAnswer });
+    });
+
+    document.getElementById("quiz-score").innerHTML = `Your Score: ${score}/100`;
+
+    saveQuizScore(score, userAnswers);
+}
+
+function saveQuizScore(score, userAnswers) {
+    const quizId = 1;  // Pastikan ini sesuai dengan quiz_id yang valid di database
+    const submitButton = document.getElementById("submitQuizButton");
+
+    fetch('/api/quiz/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            quiz_id: quizId,
+            score: score,
+            user_answers: userAnswers
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            if (data.error === "You have already submitted this quiz") {
+                if (submitButton) submitButton.disabled = true; // Nonaktifkan tombol jika sudah submit
+            }
+        } else {
+            alert("Quiz score saved successfully!");
+            if (submitButton) submitButton.disabled = true; // Nonaktifkan tombol setelah submit berhasil
+        }
+    })
+    .catch(error => console.error('Error saving quiz score:', error));
+}
+
+function exitQuiz() {
+    document.getElementById("simulation-section").style.display = "block";
+    document.getElementById("warning").style.display = "block";
+    document.getElementById("result").style.display = "block";
+    document.getElementById("education").style.display = "block";
+    document.querySelector(".btn-home").style.display = "block";
+
+    document.getElementById("quiz-section").style.display = "none";
+    document.getElementById("quiz-score").innerHTML = "";
+    progress = 0;
+    updateProgressBar();
+
+    // Tambahkan pengecekan status quiz submission
+    checkQuizSubmissionStatus();
+}
