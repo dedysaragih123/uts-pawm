@@ -1,5 +1,5 @@
 {
     "rewrites": [
-        {"source": "/", "destination": "/login.html"}
+        {"source": "/", "destination": "http:3001/localhost/api/users/login"}
     ]
 }
