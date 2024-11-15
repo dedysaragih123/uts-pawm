@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Header section starts -->
+<header class="header">
+    <section class="flex">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="/html/home.html" class="logo">ITB Virtual Lab</a>
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img src="/images/pic-1.png" alt="Profile Picture">
+            <h3 id="userName">User Name</h3>
+            <span>Student</span>
+            <a href="/html/profile.html" class="btn">View Profile</a>
+            <div class="flex-btn">
+                <a href="/html/login.html" class="option-btn">Logout</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img src="/images/pic-1.png" class="image" alt="Profile Picture">
+        <h3 class="name" id="sidebarUserName">User Name</h3>
+        <p class="role">Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="/html/home.html"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="/html/courses.html"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+        <a href="/html/exam.html"><i class="fas fa-clipboard-check"></i><span>Exam</span></a>
+        <a href="/html/practicum.html"><i class="fas fa-flask"></i><span>Practicum</span></a>
+    </nav>
+</div>
+
+<section class="form-container">
+    <form id="update-profile-form">
+       <h3>Update Profile</h3>
+       <p>Update Name</p>
+       <input type="text" name="name" placeholder="Enter your new name" maxlength="50" class="box">
+       <p>Update Email</p>
+       <input type="email" name="email" placeholder="Enter your new email" maxlength="50" class="box">
+       <p>Previous Password</p>
+       <input type="password" name="old_pass" placeholder="Enter your old password" maxlength="20" class="box">
+       <p>New Password</p>
+       <input type="password" name="new_pass" placeholder="Enter your new password" maxlength="20" class="box">
+       <p>Confirm Password</p>
+       <input type="password" name="c_pass" placeholder="Confirm your new password" maxlength="20" class="box">
+       <input type="submit" value="Update Profile" class="btn">
+
+       <!-- Notification for success or error messages -->
+       <div id="notification" style="display: none; text-align: center; margin-top: 15px;"></div>
+    </form>
+</section>
+
+<!-- Custom JS file link -->
+<script src="/js/script.js"></script>
+
+<script>
+    document.getElementById('update-profile-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const name = e.target.name.value.trim();
+        const email = e.target.email.value.trim();
+        const oldPass = e.target.old_pass.value.trim();
+        const newPass = e.target.new_pass.value.trim();
+        const confirmPass = e.target.c_pass.value.trim();
+        const notification = document.getElementById('notification');
+
+        notification.style.display = 'none';
+
+        // Check if passwords match
+        if (newPass && newPass !== confirmPass) {
+            notification.innerText = "New passwords do not match.";
+            notification.style.display = 'block';
+            notification.style.color = 'red';
+            return;
+        }
+
+        // Prepare the data to send
+        const data = {
+            name: name || undefined,
+            email: email || undefined,
+            oldPassword: oldPass,
+            newPassword: newPass || undefined
+        };
+
+        try {
+            const response = await fetch("/api/users/updateProfile", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(data),
+                credentials: "include"
+            });
+
+            const result = await response.json();
+            if (response.ok) {
+                notification.innerText = "Profile updated successfully.";
+                notification.style.display = 'block';
+                notification.style.color = 'green';
+                // Optionally, refresh the page or update user info in the header
+            } else {
+                notification.innerText = result.error || "Failed to update profile.";
+                notification.style.display = 'block';
+                notification.style.color = 'red';
+            }
+        } catch (error) {
+            console.error("Error updating profile:", error);
+            notification.innerText = "Failed to connect to the server.";
+            notification.style.display = 'block';
+            notification.style.color = 'red';
+        }
+    });
+</script>
+
+</body>
+</html>

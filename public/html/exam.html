@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Adjusted path for main stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"> <!-- Font Awesome for icons -->
+</head>
+<body>
+
+<!-- Header section starts -->
+<header class="header">
+    <section class="flex">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="/html/home.html" class="logo">ITB Virtual Lab</a>
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img id="headerProfileImage" src="/images/pic-1.png" alt="Profile Picture"> <!-- Adjusted path for profile image -->
+            <h3 id="headerUserName">User Name</h3>
+            <span id="headerUserRole">Student</span>
+            <a href="/html/profile.html" class="btn">View Profile</a>
+            <div class="flex-btn">
+                <a href="/html/login.html" class="option-btn">Logout</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<!-- Sidebar section starts -->
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img id="sidebarProfileImage" src="/images/pic-1.png" class="image" alt="Profile Picture">
+        <h3 id="sidebarUserName" class="name">User Name</h3>
+        <p id="sidebarUserRole" class="role">Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="/html/home.html"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="/html/courses.html"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+        <a href="/html/exam.html"><i class="fas fa-clipboard-check"></i><span>Exam</span></a>
+        <a href="/html/practicum.html"><i class="fas fa-flask"></i><span>Practicum</span></a>
+    </nav>
+</div>
+
+<!-- Exam list section starts -->
+<section class="courses">
+    <h1 class="heading">Exam List</h1>
+    <table class="assignment-table">
+        <thead>
+            <tr>
+                <th>NO</th>
+                <th>Title</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Duration</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>Physics Exam</td>
+                <td>22/10/24 09:05</td>
+                <td>06/11/24 23:59</td>
+                <td>60 minutes</td>
+                <td><a href="/html/exam-d.html" class="btn-as">Open</a></td> <!-- Adjusted path for the exam details page -->
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Mathematics Exam</td>
+                <td>17/10/24 09:06</td>
+                <td>24/10/24 21:00</td>
+                <td>90 minutes</td>
+                <td><a href="#" class="btn-as" onclick="showDevelopmentNotification()">Open</a></td> <!-- Placeholder link with notification -->
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Chemistry Exam</td>
+                <td>16/10/24 08:06</td>
+                <td>20/10/24 08:06</td>
+                <td>75 minutes</td>
+                <td><a href="#" class="btn-as" onclick="showDevelopmentNotification()">Open</a></td> <!-- Placeholder link with notification -->
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<!-- Custom JS file link -->
+<script src="/js/script.js"></script> <!-- Adjusted path for main script -->
+
+<!-- Development notification script -->
+<script>
+    function showDevelopmentNotification() {
+        alert("This exam is currently under development.");
+    }
+
+    // Function to load and display user profile data
+    async function loadUserProfile() {
+        try {
+            const response = await fetch("/api/users/profile", { credentials: "include" });
+            if (response.ok) {
+                const user = await response.json();
+
+                // Update the user name and profile image in various locations
+                document.getElementById("headerUserName").textContent = user.name;
+                document.getElementById("headerProfileImage").src = user.profileImage || "/images/pic-1.png"; // Default image if no profile image is provided
+
+                document.getElementById("sidebarUserName").textContent = user.name;
+                document.getElementById("sidebarUserRole").textContent = user.role || "Student"; // Update user role if available
+                document.getElementById("sidebarProfileImage").src = user.profileImage || "/images/pic-1.png";
+            } else {
+                console.error("Failed to load user profile:", response.status);
+            }
+        } catch (error) {
+            console.error("Error loading user profile:", error);
+        }
+    }
+
+    // Load user profile on page load
+    window.addEventListener("DOMContentLoaded", loadUserProfile);
+</script>
+
+</body>
+</html>

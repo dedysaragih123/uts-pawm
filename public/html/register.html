@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* Styling for the notification messages */
+        .notification {
+            display: none;
+            padding: 10px;
+            margin-top: 15px; /* Add space between button and notification */
+            color: white;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .notification.success {
+            background-color: #28a745; /* Green for success */
+        }
+
+        .notification.error {
+            background-color: #dc3545; /* Red for error */
+        }
+    </style>
+</head>
+<body>
+
+<header class="header2">
+    <section class="flex">
+        <a href="" class="logo">ITB Virtual Lab</a>
+    
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+    
+        <div class="profile">
+            <img src="/images/pic-1.png" alt="Profile Picture">
+            <div class="flex-btn">
+                <a href="/html/login.html" class="option-btn">Login</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<section class="form-container">
+    <form id="register-form">
+       <h3>REGISTER</h3>
+       <p>Name <span>*</span></p>
+       <input type="text" id="register-name" name="name" placeholder="Enter your name" required maxlength="50" class="box">
+       <p>Email <span>*</span></p>
+       <input type="email" id="register-email" name="email" placeholder="Enter your email" required maxlength="50" class="box">
+       <p>Password <span>*</span></p>
+       <input type="password" id="register-password" name="password" placeholder="Enter your password" required maxlength="20" class="box">
+       <p>Confirm Password <span>*</span></p>
+       <input type="password" id="register-confirm-password" name="c_password" placeholder="Confirm your password" required maxlength="20" class="box">
+       <input type="submit" value="Register" name="submit" class="btn">
+
+       <!-- Notification container for success or error messages -->
+       <div id="notification" class="notification"></div>
+    </form>
+</section>
+
+<!-- Custom JavaScript for form submission handling -->
+<script>
+    document.getElementById('register-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('register-name').value.trim();
+        const email = document.getElementById('register-email').value.trim();
+        const password = document.getElementById('register-password').value.trim();
+        const confirmPassword = document.getElementById('register-confirm-password').value.trim();
+        const notification = document.getElementById('notification');
+
+        notification.style.display = 'none';
+
+        if (!name || !email || !password || !confirmPassword) {
+            notification.innerText = "All fields are required.";
+            notification.className = 'notification error';
+            notification.style.display = 'block';
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            notification.innerText = "Passwords do not match.";
+            notification.className = 'notification error';
+            notification.style.display = 'block';
+            return;
+        }
+
+        try {
+            const response = await fetch("/api/users/register", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ name, email, password, c_password: confirmPassword })
+            });
+
+            const data = await response.json();
+
+            if (response.status === 200) {
+                notification.innerText = "Registration successful! You can now log in.";
+                notification.className = 'notification success';
+                notification.style.display = 'block';
+
+                setTimeout(() => {
+                    window.location.href = "/html/login.html";
+                }, 2000);
+            } else {
+                notification.innerText = data.error || "An error occurred. Please try again.";
+                notification.className = 'notification error';
+                notification.style.display = 'block';
+            }
+        } catch (error) {
+            console.error("Error during registration:", error);
+            notification.innerText = "Unable to connect to server. Please check your connection.";
+            notification.className = 'notification error';
+            notification.style.display = 'block';
+        }
+    });
+</script>
+
+<!-- Custom JS -->
+<script src="/js/script.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<!-- Header section starts -->
+<header class="header">
+    <section class="flex">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="/html/home.html" class="logo">ITB Virtual Lab</a>
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img id="profileImage" src="/images/pic-1.png" alt="Profile Picture">
+            <h3 id="userName">User Name</h3>
+            <span id="userRole">Student</span>
+            <a href="/html/profile.html" class="btn">View Profile</a>
+            <div class="flex-btn">
+                <a href="/html/login.html" class="option-btn">Logout</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img id="sidebarProfileImage" src="/images/pic-1.png" class="image" alt="Profile Picture">
+        <h3 id="sidebarUserName" class="name">User Name</h3>
+        <p id="sidebarUserRole" class="role">Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="/html/home.html"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="/html/courses.html"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+        <a href="/html/exam.html"><i class="fas fa-clipboard-check"></i><span>Exam</span></a>
+        <a href="/html/practicum.html"><i class="fas fa-flask"></i><span>Practicum</span></a>
+    </nav>
+</div>
+
+<section class="user-profile">
+    <h1 class="heading">Your Profile</h1>
+ 
+    <div class="info">
+       <div class="user">
+          <img id="profilePicture" src="/images/pic-1.png" alt="Profile Picture">
+          <h3 id="profileUserName">User Name</h3>
+          <p id="profileUserRole">Student</p>
+          <a href="#" class="inline-btn" onclick="showNotification()">Update Profile</a>
+       </div>
+    
+       <div class="box-container">
+           <!-- Example boxes displaying study stats -->
+           <div class="box">
+               <div class="flex">
+                   <i class="fas fa-clock"></i>
+                   <div>
+                       <span>10 hours</span>
+                       <p>Hours studied this week</p>
+                   </div>
+               </div>
+               <a href="#" class="inline-btn" onclick="showNotification()">View Study Logs</a>
+           </div>
+     
+           <div class="box">
+               <div class="flex">
+                   <i class="fas fa-tasks"></i>
+                   <div>
+                       <span>5</span>
+                       <p>Assignments completed</p>
+                   </div>
+               </div>
+               <a href="#" class="inline-btn" onclick="showNotification()">View Completed Assignments</a>
+           </div>
+     
+           <div class="box">
+               <div class="flex">
+                   <i class="fas fa-book"></i>
+                   <div>
+                       <span>5</span>
+                       <p>Modules completed</p>
+                   </div>
+               </div>
+               <a href="#" class="inline-btn" onclick="showNotification()">View Completed Modules</a>
+           </div>
+     
+           <div class="box">
+               <div class="flex">
+                   <i class="fas fa-chart-bar"></i>
+                   <div>
+                       <span>8</span>
+                       <p>Modules in progress</p>
+                   </div>
+               </div>
+               <a href="#" class="inline-btn" onclick="showNotification()">View Modules in Progress</a>
+           </div>
+       </div>
+    </div>
+</section>
+
+<!-- Custom JS file link -->
+<script src="/js/script.js"></script>
+
+<script>
+    // Function to display notification that the feature is under development
+    function showNotification() {
+        alert("This feature is under development and will be available soon.");
+    }
+
+    // Function to load and display user profile data
+    async function loadUserProfile() {
+        try {
+            const response = await fetch("/api/users/profile", { credentials: "include" });
+            if (response.ok) {
+                const user = await response.json();
+                
+                // Update user details dynamically
+                document.getElementById("userName").textContent = user.name;
+                document.getElementById("profileUserName").textContent = user.name;
+                document.getElementById("sidebarUserName").textContent = user.name;
+                document.getElementById("userRole").textContent = user.role || "Student";
+                document.getElementById("profileUserRole").textContent = user.role || "Student";
+                document.getElementById("sidebarUserRole").textContent = user.role || "Student";
+            } else {
+                console.error("Failed to load user profile:", response.status);
+            }
+        } catch (error) {
+            console.error("Error loading user profile:", error);
+        }
+    }
+
+    // Load user profile on page load
+    window.addEventListener("DOMContentLoaded", loadUserProfile);
+
+</script>
+
+</body>
+</html>

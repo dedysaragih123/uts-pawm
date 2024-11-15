@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <!-- Font Awesome CDN link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+    <!-- Custom CSS file link -->
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="header">
+    <section class="flex">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <a href="/html/home.html" class="logo">ITB Virtual Lab</a>
+
+        <form action="" method="post" class="search-form" onsubmit="searchCourses(event)">
+            <input type="text" id="searchBox" placeholder="Cari Mata Kuliah..." maxlength="100">
+            <button type="submit" class="fas fa-search"></button>
+        </form> 
+
+        <div class="icons">
+            <div id="user-btn" class="fas fa-user"></div>
+            <div id="toggle-btn" class="fas fa-sun"></div>
+        </div>
+
+        <div class="profile">
+            <img id="profileImage" src="/images/pic-1.png" alt="Profile Picture">
+            <h3 id="userName">User Name</h3>
+            <span>Student</span>
+            <a href="/html/profile.html" class="btn">View Profile</a>
+            <div class="flex-btn">
+                <a href="/html/login.html" class="option-btn">Logout</a>
+            </div>
+        </div>
+    </section>
+</header>
+
+<div class="side-bar">
+    <div id="close-btn">
+        <i class="fas fa-times"></i>
+    </div>
+
+    <div class="profile">
+        <img id="sidebarProfileImage" src="/images/pic-1.png" class="image" alt="Profile Picture">
+        <h3 id="sidebarUserName" class="name">User Name</h3>
+        <p class="role">Student</p>
+    </div>
+
+    <nav class="navbar">
+        <a href="/html/home.html"><i class="fas fa-home"></i><span>Home</span></a>
+        <a href="/html/courses.html"><i class="fas fa-graduation-cap"></i><span>My Courses</span></a>
+        <a href="/html/exam.html"><i class="fas fa-clipboard-check"></i><span>Exam</span></a>
+        <a href="/html/practicum.html"><i class="fas fa-flask"></i><span>Practicum</span></a>
+    </nav>
+</div>
+
+<section class="home-grid">
+    <!-- Placeholder for greeting; JavaScript will update this -->
+    <h1 class="greeting" id="greeting">Hi User!<br>
+        Selamat Datang di ITB Virtual Lab. Belajar apa hari ini?</h1> 
+
+    <div class="box-container">
+        <!-- Pengingat dan Notifikasi Box -->
+        <div class="box">
+            <h3 class="title">Pengingat dan Notifikasi</h3>
+            <ul>
+                <li>Physics-Exam: 20 Oktober 2024</li>
+                <li>Physics-assignment-deadline: 25 Oktober 2024</li>
+                <li>Physics-Practicum: 26 Oktober2024</li>
+                <li>Physics-New Course: Module 8</li>
+            </ul>
+        </div>
+
+        <!-- Kalender Akademik Box -->
+        <div class="box">
+            <h3 class="title">Kalender Akademik</h3>
+            <p>Sinkronkan jadwal tugas, ujian, dan kelas dengan Google Calendar</p>
+            <a href="#" class="inline-btn " onclick="showDevelopmentNotification2()">Sinkronisasi Google Calendar</a>
+        </div>
+    </div>
+</section>
+
+<section class="courses">
+    <h1 class="heading">TPB Courses</h1>
+    <div class="box-container">
+        <!-- Course Box 1 -->
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Siti</h3>
+                    <span>Pancasila Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/pancasila.png" alt="">
+                <span>10 modules</span>
+            </div>
+            <h3 class="title">KU1231 Pancasila</h3>
+            <a href="#" class="inline-btn" onclick="showDevelopmentNotification()">View Course</a>
+            <a href="#" class="inline-enroll-btn" onclick="showDevelopmentNotification()">Enroll This Course</a>
+        </div>
+        
+        <!-- Course Box 2 -->
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Ayi</h3>
+                    <span>English Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/english.png" alt="">
+                <span>15 modules</span>
+            </div>
+            <h3 class="title">KU1232 English</h3>
+            <a href="#" class="inline-btn" onclick="showDevelopmentNotification()">View Course</a>
+            <a href="#" class="inline-enroll-btn" onclick="showDevelopmentNotification()">Enroll This Course</a>
+        </div>
+
+        <!-- Course Box 3 -->
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Yakub</h3>
+                    <span>Design Engineering Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/design engineering.png" alt="">
+                <span>12 modules</span>
+            </div>
+            <h3 class="title">KU1233 Design Engineering</h3>
+            <a href="#" class="inline-btn" onclick="showDevelopmentNotification()">View Course</a>
+            <a href="#" class="inline-enroll-btn" onclick="showDevelopmentNotification()">Enroll This Course</a>
+        </div>
+
+        <!-- Course Box 4 -->
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Hamkah</h3>
+                    <span>Computing Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/computational thinking.png" alt="">
+                <span>18 modules</span>
+            </div>
+            <h3 class="title">KU1234 Computing</h3>
+            <a href="#" class="inline-btn" onclick="showDevelopmentNotification()">View Course</a>
+            <a href="#" class="inline-enroll-btn" onclick="showDevelopmentNotification()">Enroll This Course</a>
+        </div>
+
+        <!-- Course Box 5 -->
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Rahayu</h3>
+                    <span>Indonesian Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/indonesian.png" alt="">
+                <span>9 modules</span>
+            </div>
+            <h3 class="title">KU1235 Indonesian</h3>
+            <a href="#" class="inline-btn" onclick="showDevelopmentNotification()">View Course</a>
+            <a href="#" class="inline-enroll-btn" onclick="showDevelopmentNotification()">Enroll This Course</a>
+        </div>
+
+        <!-- Course Box 6 -->
+        <div class="box">
+            <div class="sub-course">
+                <img src="/images/user.png" alt="">
+                <div class="info">
+                    <h3>Agus</h3>
+                    <span>Sport Lecturer</span>
+                </div>
+            </div>
+            <div class="thumb">
+                <img src="/images/sport.png" alt="">
+                <span>11 modules</span>
+            </div>
+            <h3 class="title">KU1236 Sport</h3>
+            <a href="#" class="inline-btn" onclick="showDevelopmentNotification()">View Course</a>
+            <a href="#" class="inline-enroll-btn" onclick="showDevelopmentNotification()">Enroll This Course</a>
+        </div>
+    </div>
+
+    <div class="more-btn">
+        <a href="/html/allcourses.html" class="inline-option-btn">View All Courses</a>
+    </div>
+</section>
+
+<!-- Custom JS file link -->
+<script src="/js/script.js"></script>
+
+<script>
+    async function loadUserProfile() {
+        try {
+            const response = await fetch("/api/users/profile", { credentials: "include" });
+            if (response.ok) {
+                const user = await response.json();
+                document.getElementById("sidebarUserName").textContent = user.name || "User Name";
+                const greetingElement = document.getElementById("greeting");
+                greetingElement.innerHTML = `Hi ${user.name}!<br>Selamat Datang di ITB Virtual Lab. Belajar apa hari ini?`;
+                const userNameElement = document.getElementById("userName");
+                userNameElement.textContent = user.name;
+            } else {
+                console.error("Failed to load user profile:", response.status);
+                document.getElementById("sidebarUserName").textContent = "Guest";
+            }
+        } catch (error) {
+            console.error("Error fetching user profile:", error);
+            document.getElementById("sidebarUserName").textContent = "Guest";
+        }
+    }
+
+    window.addEventListener("DOMContentLoaded", loadUserProfile);
+
+    // Function to display development notification
+    function showDevelopmentNotification() {
+        alert("This course is currently under development.");
+    }
+
+    function showDevelopmentNotification2() {
+        alert("This calendar is currently under development.");
+    }
+
+    function searchCourses(event) {
+        event.preventDefault(); // Prevent form submission
+
+        const query = document.getElementById('searchBox').value.trim().toLowerCase();
+        const courses = document.querySelectorAll('.courses .box-container .box'); // Select all course boxes
+
+        if (!query) {
+            // If the search box is cleared and user submits, show all courses
+            courses.forEach(course => {
+                course.style.display = ''; // Reset display to show all courses
+            });
+            return; // Exit the function early
+        }
+
+        // Filter courses based on the search query
+        courses.forEach(course => {
+            const title = course.querySelector('.title').textContent.toLowerCase();
+            const lecturer = course.querySelector('.info h3').textContent.toLowerCase();
+
+            // Show or hide the course based on the query match
+            if (title.includes(query) || lecturer.includes(query)) {
+                course.style.display = ''; // Show the course
+            } else {
+                course.style.display = 'none'; // Hide the course
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
