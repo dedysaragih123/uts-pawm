@@ -1,28 +1,23 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "public/**",
-        "use": "@vercel/static"
-      },
-      {
-        "src": "Server/index.js",
-        "use": "@vercel/node",
-        "config":{
-          "buildCommand" : "cd ./server && npm install & npm run nyala",
-          "command" : "npm run nyala"
-        }
-      }
-    ],
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/Server/index.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/public/$1"
-      }
-    ]
-  }
-  
+  "version": 2,
+  "builds": [
+    {
+      "src": "Server/index.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "public/**/*",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "Server/index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
+    }
+  ]
+}
