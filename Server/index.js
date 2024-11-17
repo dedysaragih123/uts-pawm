@@ -102,7 +102,8 @@ app.use('/api/exams', auth, examRoutes);
 
 app.use('/api/quiz', quizRoutes);
 
-app.get('/', (req,res) => res.send('Express on Vercel'));
-
+app.get('/', (req, res) => {
+    res.redirect('/api/users/login');
+});
 
 module.exports = app;
