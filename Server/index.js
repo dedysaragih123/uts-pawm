@@ -19,7 +19,7 @@ app.use(cors({
     origin: [
         'http://localhost:3000',
         'http://localhost:3001',
-        'https://<your-vercel-domain>.vercel.app', // Replace with your actual Vercel domain
+        'https://085-physics-virtual-aj0juuc0g-dedys-projects-a843acc4.vercel.app', 
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
@@ -28,7 +28,7 @@ app.use(cors({
 // Configure PostgreSQL connection
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
+    ssl: { rejectUnauthorized: false }
 });
 
 // Test database connection
