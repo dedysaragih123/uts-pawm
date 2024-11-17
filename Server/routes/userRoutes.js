@@ -73,9 +73,9 @@ router.post('/login', async (req, res) => {
             return res.status(400).json({ error: "Invalid credentials." });
         }
 
-        // Store userId in session
+        // Simpan userId di sesi
         req.session.userId = user.id;
-        console.log("User ID stored in session:", req.session.userId);
+        console.log("Login successful. Session data:", req.session);
 
         res.status(200).json({ message: "Login successful", userId: user.id, name: user.name });
     } catch (error) {
@@ -83,6 +83,7 @@ router.post('/login', async (req, res) => {
         res.status(500).json({ error: "Failed to log in." });
     }
 });
+
 
 // Logout Route
 router.post('/logout', (req, res) => {
