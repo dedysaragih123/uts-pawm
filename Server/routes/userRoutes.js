@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const bcrypt = require('bcryptjs'); // Ensure bcrypt is required if it's used
+const bcrypt = require('bcryptjs'); 
 const router = express.Router();
 
 

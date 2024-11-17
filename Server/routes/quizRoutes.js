@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const auth = require('../middleware/auth'); // Middleware untuk autentikasi
+const auth = require('../middleware/auth'); 
 
 // Route untuk menyimpan skor quiz
 router.post('/submit', auth, async (req, res) => {
     const { quiz_id, score, user_answers } = req.body;
-    const user_id = req.session.userId;  // Pastikan user_id diambil dari session
+    const user_id = req.session.userId;  
 
     console.log("Received data:", { quiz_id, user_id, score, user_answers });
 

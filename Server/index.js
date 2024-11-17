@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -6,29 +7,29 @@ const pgSession = require('connect-pg-simple')(session);
 const { Pool } = require('pg');
 const cors = require('cors');
 const userRoutes = require('./routes/userRoutes');
-const auth = require('./middleware/auth');
 const quizRoutes = require('./routes/quizRoutes');
+const examRoutes = require('./routes/examRoutes');
+const auth = require('./middleware/auth');
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
-require('dotenv').config(); 
-
-// Configure CORS with specific origin
+// Configure CORS
 app.use(cors({
     origin: [
-        'http://localhost:3000', 
+        'http://localhost:3000',
         'http://localhost:3001',
-        'https://085-physics-virtual-aj0juuc0g-dedys-projects-a843acc4.vercel.app' // tambahkan domain Vercel Anda
+        'https://<your-vercel-domain>.vercel.app', // Replace with your actual Vercel domain
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
 
+// Configure PostgreSQL connection
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
 });
-
 
 // Test database connection
 pool.connect((err, client, release) => {
@@ -50,34 +51,36 @@ app.use((req, res, next) => {
     next();
 });
 
-// Session configuration using PostgreSQL as session store
+// Session configuration
 app.use(session({
     store: new pgSession({
         pool: pool,
         tableName: 'session',
     }),
-    secret: 'qwerty270404',
+    secret: process.env.SESSION_SECRET || 'default-secret',
     resave: false,
     saveUninitialized: false,
-    cookie: { 
-        secure: process.env.NODE_ENV === 'production', // true in production
+    cookie: {
+        secure: process.env.NODE_ENV === 'production', // Enable secure cookies in production
         httpOnly: true,
-        maxAge: 30 * 24 * 60 * 60 * 1000,
-        sameSite: 'lax'
-    }
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        sameSite: 'lax',
+    },
 }));
 
-// Body parsers for handling form submissions
+// Body parsers
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Serve static files from the "public" directory
+// Static files
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Routes for handling user-related requests
+// Routes
 app.use('/api/users', userRoutes);
+app.use('/api/quiz', quizRoutes);
+app.use('/api/exams', auth, examRoutes);
 
-// Route to serve HTML files
+// Serve HTML files
 app.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, '../public/html/register.html'));
 });
@@ -86,25 +89,12 @@ app.get('/home', auth, (req, res) => {
     res.sendFile(path.join(__dirname, '../public/html/home.html'));
 });
 
-// Testing route to check if the server is running
-app.get('/test', (req, res) => {
-    res.send('Server is running');
+// Redirect root URL to login API
+app.get('/', (req, res) => {
+    res.redirect('/api/users/login');
 });
 
 // Start the server
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
-
-const protectedRouteHandler = (req, res) => {
-    res.json({ message: "You have accessed a protected route!" });
-};
-
-const examRoutes = require('./routes/examRoutes');
-app.use('/api/exams', auth, examRoutes);
-
-app.use('/api/quiz', quizRoutes);
-
-app.get('/', (req, res) => {
-    res.redirect('/api/users/login');
-});
 
 module.exports = app;
