@@ -86,7 +86,11 @@
     "typedarray": "^0.0.6",
     "unpipe": "^1.0.0",
     "util-deprecate": "^1.0.2",
-    "xtend": "^4.0.2"
+    "xtend": "^4.0.2",
+    "express-session": "^1.17.3",
+    "connect-pg-simple": "^9.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1"
   },
   "scripts": {
     "start": "node Server/index.js",
