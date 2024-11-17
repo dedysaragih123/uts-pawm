@@ -15,7 +15,11 @@ require('dotenv').config();
 
 // Configure CORS with specific origin
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://localhost:3001'],
+    origin: [
+        'http://localhost:3000', 
+        'http://localhost:3001',
+        'https://085-physics-virtual-aj0juuc0g-dedys-projects-a843acc4.vercel.app' // tambahkan domain Vercel Anda
+    ],
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
 }));
