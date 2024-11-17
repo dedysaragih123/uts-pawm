@@ -22,11 +22,8 @@ app.use(cors({
 
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false, // Izinkan SSL tanpa sertifikat yang divalidasi
-    },
+    ssl: process.env.DATABASE_SSL === 'true' ? { rejectUnauthorized: false } : false,
 });
-
 
 
 // Test database connection
