@@ -1,7 +1,8 @@
 const express = require('express');
 const path = require('path');
-const bcrypt = require('bcrypt'); // Ensure bcrypt is required if it's used
+const bcrypt = require('bcryptjs'); // Ensure bcrypt is required if it's used
 const router = express.Router();
+
 
 // Serve the register.html page
 router.get('/register', (req, res) => {
