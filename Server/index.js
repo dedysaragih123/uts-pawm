@@ -11,6 +11,8 @@ const quizRoutes = require('./routes/quizRoutes');
 const examRoutes = require('./routes/examRoutes');
 const auth = require('./middleware/auth');
 const app = express();
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 const PORT = process.env.PORT || 3000;
 
