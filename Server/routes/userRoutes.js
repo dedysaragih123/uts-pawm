@@ -3,6 +3,8 @@ const path = require('path');
 const bcrypt = require('bcryptjs'); 
 const router = express.Router();
 
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 
 // Serve the register.html page
 router.get('/register', (req, res) => {
