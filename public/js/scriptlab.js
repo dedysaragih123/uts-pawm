@@ -167,22 +167,6 @@ document.getElementById('velocity').addEventListener('input', updateWave);
 updateWave();
 checkInputs();
 
-function startAnimation() {
-    const wavelength = parseFloat(document.getElementById('wavelength').value);
-    const warning = document.getElementById('warning');
-    
-    if (!wavelength || isNaN(wavelength) || wavelength <= 0) {
-        warning.style.display = 'block';
-        return;
-    }
-
-    warning.style.display = 'none';
-    playSoundEffect(); 
-    if (!animationId) {
-        animateWave();
-    }
-}
-
 function playSoundEffect() {
     const audio = new Audio('sound/start-sound.wav'); 
     audio.play();

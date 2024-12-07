@@ -3,9 +3,6 @@ const path = require('path');
 const bcrypt = require('bcryptjs'); 
 const router = express.Router();
 
-const cookieParser = require('cookie-parser');
-app.use(cookieParser());
-
 // Serve the register.html page
 router.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, '../../public/html/register.html')); // Adjusted path
